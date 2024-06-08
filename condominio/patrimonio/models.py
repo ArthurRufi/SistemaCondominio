@@ -1,5 +1,5 @@
 from django.db import models
-
+#----------------------------------------------------REALIZAR CONFIG DO BANCO DE DADOS-------------------------------------------
 
 class PatrimonioPrivadoUtensilio(models.Model):
     nome = models.CharField(max_length=50)
@@ -8,6 +8,7 @@ class PatrimonioPrivadoUtensilio(models.Model):
     emprestado = models.BooleanField(default=False)
     emprestadoaquem = models.IntegerField(default=0)
     '''
+    ISSO AQUI DEVE SER IMPLEMENTADO
     def emprestar_objeto(request, objeto_id):
     objeto = get_object_or_404(Objeto, id=objeto_id)
     if request.method == 'POST':
