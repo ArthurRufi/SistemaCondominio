@@ -1,3 +1,5 @@
 venv
 docs.txt
 requisitos.txt
+__init__.py
+settings.py
