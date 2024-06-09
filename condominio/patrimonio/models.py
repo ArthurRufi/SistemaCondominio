@@ -7,9 +7,29 @@ class PatrimonioPrivadoUtensilio(models.Model):
     tipo_objeto = models.CharField(max_length=255)
     emprestado = models.BooleanField(default=False)
     emprestadoaquem = models.IntegerField(default=0)
-    '''
-    ISSO AQUI DEVE SER IMPLEMENTADO
-    def emprestar_objeto(request, objeto_id):
+    def emprestar(self, usuario):
+        if not self.esta_emprestado:
+            self.esta_emprestado = True
+            self.emprestado_para = usuario
+            self.save()
+
+
+    def devolver(self):
+        if self.esta_emprestado:
+            self.esta_emprestado = False
+            self.emprestado_para = None
+            self.save()
+
+
+    def __str__(self) -> str:
+        return super().__str__()
+
+
+
+'''
+VIEW, ISSO VAI NA VIEW
+@login_required
+def emprestar_objeto(request, objeto_id):
     objeto = get_object_or_404(Objeto, id=objeto_id)
     if request.method == 'POST':
         objeto.emprestar(request.user)
@@ -25,5 +45,4 @@ def devolver_objeto(request, objeto_id):
     return render(request, 'devolver_objeto.html', {'objeto': objeto})
 '''
 
-    def __str__(self) -> str:
-        return super().__str__()
+    
