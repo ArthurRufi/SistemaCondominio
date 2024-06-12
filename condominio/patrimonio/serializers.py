@@ -4,3 +4,4 @@ from patrimonio.models import PatrimonioPrivadoUtensilio
 
 class SerializersPatrimonioPrivado(serializers.Serializer):
     id = serializers.IntegerField(read_only = True)
+    
