@@ -2,15 +2,25 @@ from django.db import models
 
 # Create your models here.
 
-class modelsAreas(models.Model):
+class modelsArea(models.Model):
     nome = models.CharField(max_length=255)
     status = models.BooleanField (default=False)
+    tipo = models.CharField(max_length=1000)
 
 
-class modelsReservasAreas(models.Model):
+
+class modelsReservasArea(models.Model):
     nome = models.CharField()
     moradorId = models.IntegerField(default=0)
     areaNome = models.CharField()
     dataReserva = models.DateField()
     horarioReserva = models.TimeField()
+    tempoTotal = models.IntegerField(default=3)
 
+
+class modelsAreasSerivico(models.Model):
+    nome = models.CharField(max_length=1000)
+    status = models.CharField (max_length=255)
+    ultimamanutencao = models.DateField()
+    proximamanutencao = models.DateField()
+    
