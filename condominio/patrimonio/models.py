@@ -31,4 +31,9 @@ class ObjetoEmprestado(models.Model):
     codigoProprietario = models.IntegerField()
     codigoPrestamista = models.IntegerField()
     dataehora = models.DateTimeField()
+
+
+class PatrimonioPublico(models.Model):
+    nome = models.CharField(max_length=255)
+    
     

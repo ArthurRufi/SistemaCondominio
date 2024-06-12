@@ -11,4 +11,5 @@ class Visitantes():
     nome = models.CharField(max_length=1000)
     codigoMorador = models.IntegerField()
     ultimaentrada = models.DateTimeField()
+    #informacoes no confindoc
     codigoIdentificador = models.IntegerField()

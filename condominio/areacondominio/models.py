@@ -18,9 +18,10 @@ class modelsReservasArea(models.Model):
     tempoTotal = models.IntegerField(default=3)
 
 
-class models(models.Model):
+class modelsAreaManuntencao(models.Model):
     nome = models.CharField(max_length=1000)
     status = models.CharField (max_length=255)
     ultimamanutencao = models.DateField()
     proximamanutencao = models.DateField()
+    statusServico = models.CharField(max_length=255)
 
