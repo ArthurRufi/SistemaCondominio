@@ -24,4 +24,11 @@ class PatrimonioPrivadoUtensilio(models.Model):
 
     def __str__(self) -> str:
         return super().__str__()
+
+
+class ObjetoEmprestado(models.Model):
+    codigoObjeto = models.IntegerField()
+    codigoProprietario = models.IntegerField()
+    codigoPrestamista = models.IntegerField()
+    dataehora = models.DateTimeField()
     
