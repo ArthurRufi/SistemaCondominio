@@ -2,13 +2,16 @@ from django.db import models
 
 # Create your models here.
 
+
+#essa classe se refere a todas as areas do condominio
 class modelsArea(models.Model):
     nome = models.CharField(max_length=255)
+    #se status for marcado false significa que nao esta ocupada se marcado true esta ocupada
     status = models.BooleanField (default=False)
+    #se refere a tipo: quadras, churrasqueiras, piscinas, area de lazer ou area de eventos
     tipo = models.CharField(max_length=1000)
 
-
-
+#essa classe se refere as areas reservadas do condominio
 class modelsReservasArea(models.Model):
     nome = models.CharField()
     moradorId = models.IntegerField(default=0)
@@ -17,7 +20,7 @@ class modelsReservasArea(models.Model):
     horarioReserva = models.TimeField()
     tempoTotal = models.IntegerField(default=3)
 
-
+#essa classe se refere a manutencao de areas
 class modelsAreaManuntencao(models.Model):
     nome = models.CharField(max_length=1000)
     status = models.CharField (max_length=255)
