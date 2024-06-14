@@ -13,9 +13,9 @@ class modelsArea(models.Model):
 
 #essa classe se refere as areas reservadas do condominio
 class modelsReservasArea(models.Model):
-    nome = models.CharField()
+    nome = models.CharField(max_length=255)
     moradorId = models.IntegerField(default=0)
-    areaNome = models.CharField()
+    areaNome = models.CharField(max_length=255)
     dataReserva = models.DateField()
     horarioReserva = models.TimeField()
     tempoTotal = models.IntegerField(default=3)
