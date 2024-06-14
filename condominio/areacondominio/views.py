@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from datetime import date
 
 class APIStatusArea(APIView):
     def get(self, request):
@@ -19,6 +20,7 @@ class APIStatusArea(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class APISearchArea(APIView):
     def get(self, request, nome):
         if not nome:
@@ -31,6 +33,32 @@ class APISearchArea(APIView):
         else:
             return Response({'message': 'Nenhuma área encontrada com o nome fornecido.'}, status=status.HTTP_404_NOT_FOUND)
         
+
+class APISearchReservaDate(APIView):
+    def get(self, resquest, dia, mes, ano):
+        try:
+            date_convert = date(int(ano), int(mes), int(dia))
+            reserva = modelsReservasArea.objects.filter(dataReserva=date_convert)
+            if reserva.exists():
+                # Serializa os resultados
+                serializer = SerializersReservasArea(reserva, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({'message': 'Não há reserva para a data especificada.'}, status=status.HTTP_404_NOT_FOUND)
+        except modelsReservasArea.DoesNotExist:
+            return Response({'message': 'Reserva nao encontrada'}, status=status.HTTP_404_NOT_FOUND)
+        except ValueError:
+            return Response({'message': 'Data inválida.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class APIAddReserva(APIView):
+    def post(self, request):
+        serializer = SerializersReservasArea(data=request.data)
+        if serializer.is_valid():
+            serializer.save()  # Salva o novo objeto no banco de dados
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 '''
 ADICIONAR ISSO NO FUTURO PARA CONVERTER INFORMAÇÕES EM URL
 from urllib.parse import quote
