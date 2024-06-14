@@ -20,17 +20,27 @@ class APIStatusArea(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class APISearchArea(APIView):
-    def get(self, request):
-        # Extrair o parâmetro 'nome' da URL
-        nome = request.query_params.get('nome')
-
+    def get(self, request, nome):
         if not nome:
             return Response({'error': 'Nome não fornecido.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        try:
-            # Tentar encontrar um registro que corresponda ao nome fornecido
-            area = modelsArea.objects.get(nome=nome)
-            serializer = SerializersArea(area)
+        areas = modelsArea.objects.filter(nome=nome)
+        if areas.exists():
+            serializer = SerializersArea(areas, many=True)  # Usar many=True para lidar com múltiplos objetos
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except modelsArea.DoesNotExist:
-            return Response({'message': 'Registro não encontrado.'}, status=status.HTTP_404_NOT_FOUND) 
+        else:
+            return Response({'message': 'Nenhuma área encontrada com o nome fornecido.'}, status=status.HTTP_404_NOT_FOUND)
+        
+'''
+ADICIONAR ISSO NO FUTURO PARA CONVERTER INFORMAÇÕES EM URL
+from urllib.parse import quote
+
+# Exemplo de nome de área
+nome_area = "Salão de Festas"
+
+# Codificar o nome para uso em URLs
+url_nome = quote(nome_area)
+
+# URL final com o nome codificado
+url_final = f"http://localhost:8000/areas/searcharea/{url_nome}"
+print(url_final)'''
