@@ -8,23 +8,6 @@ class PatrimonioPrivadoUtensilio(models.Model):
     emprestado = models.BooleanField(default=False)
     emprestadoaquem = models.IntegerField(default=0)
 
-    def emprestar(self, usuario):
-        if not self.esta_emprestado:
-            self.esta_emprestado = True
-            self.emprestado_para = usuario
-            self.save()
-
-
-    def devolver(self):
-        if self.esta_emprestado:
-            self.esta_emprestado = False
-            self.emprestado_para = None
-            self.save()
-
-
-    def __str__(self) -> str:
-        return super().__str__()
-
 
 class ObjetoEmprestado(models.Model):
     codigoObjeto = models.IntegerField()
