@@ -1,22 +1,20 @@
 from rest_framework import serializers
-from patrimonio.models import PatrimonioPrivadoUtensilio
+from patrimonio.models import PatrimonioPrivadoCompartilhaveis, ObjetoEmprestado, PatrimonioPublico
 
 
-class SerializersPatrimonioPrivado(serializers.Serializer):
+class SerializersPatrimonioPrivado(serializers.ModelSerializer):
     
-    nome = serializers.CharField()
-    proprietario = serializers.IntegerField()
-    tipo_objeto = serializers.CharField()
-    emprestado = serializers.BooleanField()
-    emprestadoaquem = serializers.IntegerField()
+    class Meta:
+        model = PatrimonioPrivadoCompartilhaveis
+        fields = ['nome', 'proprietario', 'tipo_objeto', 'emprestado', 'emprestadoaquem']
 
 
-class ObjetoEmprestado(serializers.Serializer):
-    codigoObjeto = serializers.IntegerField()
-    codigoProprietario = serializers.IntegerField()
-    codigoPrestamista = serializers.IntegerField()
-    dataehora = serializers.DateTimeField()
+class SerializersObjetoEmprestado(serializers.ModelSerializer):
+    class Meta: 
+        model = ObjetoEmprestado
+        fields = ['codigoObjeto', 'codigoProprietario', 'codigoPrestamista', 'dataehora']
 
-
-class PatrimonioPublico(serializers.Serializer):
-    nome = serializers.CharField()
+class SerializersPatrimonioPublico(serializers.ModelSerializer):
+    class Meta:
+        model = PatrimonioPublico
+        fields = ['nome']

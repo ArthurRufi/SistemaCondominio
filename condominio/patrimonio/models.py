@@ -1,7 +1,7 @@
 from django.db import models
 #----------------------------------------------------REALIZAR CONFIG DO BANCO DE DADOS-------------------------------------------
 #se refere aos patrimonios compartilhaveis
-class PatrimonioPrivadoUtensilio(models.Model):
+class PatrimonioPrivadoCompartilhaveis(models.Model):
     nome = models.CharField(max_length=50)
     proprietario = models.IntegerField(default= 0)
     tipo_objeto = models.CharField(max_length=255)
