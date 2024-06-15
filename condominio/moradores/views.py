@@ -8,5 +8,5 @@ from rest_framework import status
 class ConsultarListaCompletaMoradores(APIView):
     def get(self, request):
         moradores = Moradores.objects.all()
-        serializers = SerializersVisitante(moradores, many = True)
+        serializers = SerializersMorador(moradores, many = True)
         return Response(serializers.data, status=status.HTTP_200_OK)
