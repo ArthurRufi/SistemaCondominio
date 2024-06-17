@@ -10,3 +10,10 @@ class ConsultarListaCompletaMoradores(APIView):
         moradores = Moradores.objects.all()
         serializers = SerializersMorador(moradores, many = True)
         return Response(serializers.data, status=status.HTTP_200_OK)
+    
+
+class ConsultarVisitantes(APIView):
+    def get(self, request):
+        visitantes = Visitantes.objects.all()
+        serializers = SerializersVisitante(visitantes, many= True)
+        return Response(serializers.data, status=status.HTTP_200_OK)
