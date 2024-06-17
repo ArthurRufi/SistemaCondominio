@@ -9,7 +9,7 @@ class SerializersMorador(serializers.Serializer):
     codigoMorador = serializers.IntegerField()
 
 
-class SerializersVisitante():
+class SerializersVisitante(serializers.Serializer):
     nome = serializers.CharField(max_length=1000)
     codigoMorador = serializers.IntegerField()
     ultimaentrada = serializers.DateTimeField()
