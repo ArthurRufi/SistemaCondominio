@@ -8,6 +8,11 @@ class SerializersArea(serializers.Serializer):
 
     def create(self, validated_data):
         return modelsArea.objects.create(**validated_data)
+    
+class SerializersAreaStatus(serializers.ModelSerializer):
+    class Meta:
+        model = modelsArea
+        fields = ['status']
 
 
 class SerializersReservasArea(serializers.Serializer):

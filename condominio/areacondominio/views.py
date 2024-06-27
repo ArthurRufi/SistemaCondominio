@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import modelsArea, modelsAreaManuntencao, modelsReservasArea
-from .serializers import SerializersArea, SerializersManutencao, SerializersReservasArea
+from .serializers import SerializersArea, SerializersManutencao, SerializersReservasArea, SerializersAreaStatus
 from django.views.generic import TemplateView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -28,7 +28,7 @@ class APISearchArea(APIView):
 
         areas = modelsArea.objects.filter(nome=nome)
         if areas.exists():
-            serializer = SerializersArea(areas, many=True)  # Usar many=True para lidar com múltiplos objetos
+            serializer = SerializersAreaStatus(areas, many=True)  # Usar many=True para lidar com múltiplos objetos
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'Nenhuma área encontrada com o nome fornecido.'}, status=status.HTTP_404_NOT_FOUND)
