@@ -7,6 +7,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from datetime import date
 
+
+#api que consulta o status de todas as areas
 class APIStatusArea(APIView):
     def get(self, request):
         area = modelsArea .objects.all()
@@ -20,7 +22,7 @@ class APIStatusArea(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+#api que consulta o status de uma area especifica
 class APISearchArea(APIView):
     def get(self, request, nome):
         if not nome:
@@ -33,7 +35,7 @@ class APISearchArea(APIView):
         else:
             return Response({'message': 'Nenhuma área encontrada com o nome fornecido.'}, status=status.HTTP_404_NOT_FOUND)
         
-
+#api que consulta status da area naquela data
 class APISearchReservaDate(APIView):
     def get(self, resquest, dia, mes, ano):
         try:
@@ -50,7 +52,7 @@ class APISearchReservaDate(APIView):
         except ValueError:
             return Response({'message': 'Data inválida.'}, status=status.HTTP_400_BAD_REQUEST)
 
-
+#api que reserva aquela area para aquele dia x
 class APIAddReserva(APIView):
     def post(self, request):
         serializer = SerializersReservasArea(data=request.data)
