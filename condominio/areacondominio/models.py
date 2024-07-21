@@ -19,6 +19,7 @@ class modelsReservasArea(models.Model):
     dataReserva = models.DateField()
     horarioReserva = models.TimeField()
     tempoTotal = models.IntegerField(default=3)
+    tiporeserva = models.CharField(max_length=255, default=' ')
 
 #essa classe se refere a manutencao de areas
 class modelsAreaManuntencao(models.Model):

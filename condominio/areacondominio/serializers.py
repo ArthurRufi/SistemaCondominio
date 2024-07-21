@@ -22,6 +22,7 @@ class SerializersReservasArea(serializers.Serializer):
     dataReserva = serializers.DateField()
     horarioReserva = serializers.TimeField()
     tempoTotal = serializers.IntegerField()
+    tiporeserva = serializers.CharField()
 
     def create(self, validated_data):
         return modelsReservasArea.objects.create(**validated_data)

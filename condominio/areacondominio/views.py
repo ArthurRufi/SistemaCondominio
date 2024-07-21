@@ -22,25 +22,34 @@ class APIStatusArea(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#api que consulta o status de uma area especifica
+#api que consulta o status de uma area especifica deve ser usada junto a api de reser a de area
 class APISearchArea(APIView):
     def get(self, request, nome):
-        if not nome:
+        convert =  list(nome)
+        for i in range(len(convert)):
+            if convert[i] == '-':
+                convert[i] = ' '
+                
+        convertname = ''.join(convert)
+
+        if not convertname:
             return Response({'error': 'Nome não fornecido.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        areas = modelsArea.objects.filter(nome=nome)
+        areas = modelsArea.objects.filter(nome=convertname)
         if areas.exists():
             serializer = SerializersAreaStatus(areas, many=True)  # Usar many=True para lidar com múltiplos objetos
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response({'message': 'Nenhuma área encontrada com o nome fornecido.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': f'Nenhuma área encontrada com o nome fornecido. {convertname}'}, status=status.HTTP_404_NOT_FOUND)
         
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!arrumar repeticao de codigo        
 #api que consulta status da area naquela data
 class APISearchReservaDate(APIView):
     def get(self, resquest, dia, mes, ano):
         try:
             date_convert = date(int(ano), int(mes), int(dia))
-            reserva = modelsReservasArea.objects.filter(dataReserva=date_convert)
+            reserva = modelsReservasArea.objects.filter(dataReserva=date_convert, data = resquest.data)
             if reserva.exists():
                 # Serializa os resultados
                 serializer = SerializersReservasArea(reserva, many=True)
