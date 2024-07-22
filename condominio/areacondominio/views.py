@@ -22,6 +22,7 @@ class APIStatusArea(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 #api que consulta o status de uma area especifica deve ser usada junto a api de reser a de area
 class APISearchArea(APIView):
     def get(self, request, nome):
@@ -61,6 +62,7 @@ class APISearchReservaDate(APIView):
         except ValueError:
             return Response({'message': 'Data inválida.'}, status=status.HTTP_400_BAD_REQUEST)
 
+
 #api que reserva aquela area para aquele dia x
 class APIAddReserva(APIView):
     def post(self, request):
@@ -70,6 +72,14 @@ class APIAddReserva(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class ModificarAreas(APIView):
+    def post (self, request):
+        serializer =  SerializersArea(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 '''
 ADICIONAR ISSO NO FUTURO PARA CONVERTER INFORMAÇÕES EM URL
 from urllib.parse import quote
