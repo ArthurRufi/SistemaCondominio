@@ -9,5 +9,5 @@ urlpatterns = [
     path('searcharea/<str:nome>', APISearchArea.as_view(), name='und'),
     #nessa proxima endpoint vai ser referir a areas que não estão com reservas para aquela data e filtrar pelo tipo.
     path('reservas/<str:dia>/<str:mes>/<str:ano>/', APISearchReservaDate.as_view(), name='undi'),
-    path('reservar/', APIAddReserva.as_view(), name='no')
+    path('reservar/', APIAddReserva.as_view(), name='no'),
 ]
