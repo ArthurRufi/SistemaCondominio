@@ -1,8 +1,6 @@
 from django.db import models
 
-# Create your models here.
-
-
+    
 #essa classe se refere a todas as areas do condominio
 class modelsArea(models.Model):
     nome = models.CharField(max_length=255)
