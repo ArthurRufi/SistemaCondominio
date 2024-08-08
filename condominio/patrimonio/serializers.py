@@ -23,4 +23,4 @@ class SerializersPatrimonioPublico(serializers.ModelSerializer):
 class SerilalizersVeiculos(serializers.ModelSerializer):
     class Meta: 
         model = Veiculo
-        fields = ['modelo','placa', 'cor', 'tipo', 'codigoMorador']
+        fields = ['modelo', 'placa', 'cor', 'tipo', 'codigoMorador']

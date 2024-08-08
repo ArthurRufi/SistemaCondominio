@@ -24,7 +24,7 @@ class PatrimonioPublico(models.Model):
 
 class Veiculo(models.Model):
     modelo=models.CharField(max_length=255)
-    placa=models.IntegerField(default= 0)
+    placa=models.CharField(default= '0')
     cor = models.CharField(max_length=255)
     tipo = models.CharField(max_length=255)
     codigoMorador = models.IntegerField()
