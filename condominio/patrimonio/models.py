@@ -19,4 +19,11 @@ class ObjetoEmprestado(models.Model):
 class PatrimonioPublico(models.Model):
     nome = models.CharField(max_length=255)
     
+
+class Veiculo(models.Model):
+    modelo = models.CharField(max_length=255)
+    placa = models.IntegerField()
+    cor = models.CharField(max_length=255)
+    tipo = models.CharField(max_length=255)
+    codigoMorador = models.IntegerField()
     

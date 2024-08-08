@@ -7,6 +7,7 @@ class Moradores(models.Model):
     codigoMorador = models.IntegerField(default=0)
     responsavel = models.BooleanField(default=False)
 
+
 class Visitantes(models.Model):
     nome = models.CharField(max_length=1000)
     codigoMorador = models.IntegerField()
