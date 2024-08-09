@@ -28,3 +28,7 @@ class RegistrarVeiculo(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+
+
+''' OLHAR NOS MODELS O QUE RESTA PARA INSERIR'''
