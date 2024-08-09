@@ -4,10 +4,11 @@ from .views import APIStatusArea, APISearchArea, APISearchReservaDate, APIAddRes
 
 urlpatterns = [
     #confere todas as areas
-    path('apistatusarea/', APIStatusArea.as_view(), name='undifield'),
+    path('todas-as-areas/', APIStatusArea.as_view(), name='Areas'),
     #consulta se a area está disponivel ou não, não em caso de reservas
-    path('searcharea/<str:nome>', APISearchArea.as_view(), name='und'),
+    path('pesquisar-area/<str:nome>', APISearchArea.as_view(), name='pesquisar'),
     #nessa proxima endpoint vai ser referir a areas que não estão com reservas para aquela data e filtrar pelo tipo.
-    path('reservas/<str:dia>/<str:mes>/<str:ano>/', APISearchReservaDate.as_view(), name='undi'),
-    path('reservar/', APIAddReserva.as_view(), name='no'),
+    path('consultar-reservas/<str:dia>/<str:mes>/<str:ano>/', APISearchReservaDate.as_view(), name='consultar'),
+    #realiza a reserva da area e caso esteja reservada ela é retornada um badrequest
+    path('reservar/', APIAddReserva.as_view(), name='reservar'),
 ]
