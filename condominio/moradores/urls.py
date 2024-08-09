@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import ConsultarListaCompletaMoradores, ConsultarVisitantes
+from .views import ConsultarListaCompletaMorador, ConsultarVisitante
 
 
 urlpatterns = [
-    path('', ConsultarListaCompletaMoradores.as_view(), name='asdka'),
-    path('visitantes/', ConsultarVisitantes.as_view(), name='akkak'),
+    path('', ConsultarListaCompletaMorador.as_view(), name='asdka'),
+    path('visitantes/', ConsultarVisitante.as_view(), name='akkak'),
 ]

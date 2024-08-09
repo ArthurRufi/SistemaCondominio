@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import APIStatusArea, APISearchArea, APISearchReservaDate, APIAddReserva
+from .views import APIArea, APISearchArea, APISearchReservaDate, APIAddReserva
 
 
 urlpatterns = [
     #confere todas as areas
-    path('todas-as-areas/', APIStatusArea.as_view(), name='Areas'),
+    path('todas-as-areas/', APIArea.as_view(), name='Areas'),
     #consulta se a area está disponivel ou não, não em caso de reservas
     path('pesquisar-area/<str:nome>', APISearchArea.as_view(), name='pesquisar'),
     #nessa proxima endpoint vai ser referir a areas que não estão com reservas para aquela data e filtrar pelo tipo.

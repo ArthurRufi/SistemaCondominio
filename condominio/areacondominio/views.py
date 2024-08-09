@@ -9,7 +9,7 @@ from datetime import date
 
 
 #api que consulta o status de todas as areas
-class APIStatusArea(APIView):
+class APIArea(APIView):
     def get(self, request):
         area = modelsArea .objects.all()
         serializers = SerializersArea(area, many=True)
@@ -21,6 +21,9 @@ class APIStatusArea(APIView):
             serializer.save()  # Salva o novo objeto no banco de dados
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete():
+        pass
 
 
 #api que consulta o status de uma area especifica deve ser usada junto a api de reser a de area
@@ -71,6 +74,10 @@ class APIAddReserva(APIView):
             serializer.save()  # Salva o novo objeto no banco de dados
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class APIDeleteReserva():
+    pass
 
 
 class ModificarAreas(APIView):
