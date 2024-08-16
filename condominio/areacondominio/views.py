@@ -14,6 +14,7 @@ from datetime import date
 class APIArea(APIView):
     permission_classes = [AllowAny]
     def get(self, request):
+        
         area = modelsArea .objects.all()
         serializers = SerializersArea(area, many=True)
         return Response(serializers.data)
