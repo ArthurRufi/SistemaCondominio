@@ -2,18 +2,21 @@ from django.shortcuts import render
 from .models import modelsArea, modelsAreaManuntencao, modelsReservasArea
 from .serializers import SerializersArea, SerializersManutencao, SerializersReservasArea, SerializersAreaStatus
 from django.views.generic import TemplateView
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from datetime import date
 
 
 #api que consulta o status de todas as areas
 class APIArea(APIView):
+    permission_classes = [AllowAny]
     def get(self, request):
         area = modelsArea .objects.all()
         serializers = SerializersArea(area, many=True)
-        return Response(serializers.data, content_type='application/json')
+        return Response(serializers.data)
     
     def post(self, request):
         serializer = SerializersArea(data=request.data)
@@ -26,8 +29,11 @@ class APIArea(APIView):
         pass
 
 
+
 #api que consulta o status de uma area especifica deve ser usada junto a api de reser a de area
 class APISearchArea(APIView):
+    permission_classes = [AllowAny]
+    
     def get(self, request, nome):
         convert =  list(nome)
         for i in range(len(convert)):
@@ -44,7 +50,7 @@ class APISearchArea(APIView):
             serializer = SerializersAreaStatus(areas, many=True)  # Usar many=True para lidar com múltiplos objetos
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response({'message': f'Nenhuma área encontrada com o nome fornecido. {convertname}'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': f'Nenhuma área encontrada com o nome fornecido: {convertname}'}, status=status.HTTP_404_NOT_FOUND)
         
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!arrumar repeticao de codigo        
