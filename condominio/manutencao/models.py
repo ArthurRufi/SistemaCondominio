@@ -9,6 +9,7 @@ class ManutecaoRealizada():
 class SolicitacaoManutencao():
     #para moradores solicitarem manutenções e funcionarios solicitam manutencoes
     #aqui os funcionarios que vao analisar se a solicitacao foi aceita ou nao
+    #pensar como adicionar um nivel de prioriodade
     pass
 
 #criar tabela para lista de manutencao
