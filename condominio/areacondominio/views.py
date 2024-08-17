@@ -77,7 +77,7 @@ class APISearchReservaDate(APIView):
 #api que reserva aquela area para aquele dia x
 class APIAddReserva(APIView):
     def post(self, request):
-        
+
 
         try:    
             serializer = SerializersReservasArea(data=request.data)
@@ -86,7 +86,7 @@ class APIAddReserva(APIView):
                 serializer.save()  # Salva o novo objeto no banco de dados
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+        #arrume essa merda. ISSO ESTÁ HORRIVEL!!!!!!!!!!
         except serializer.DoesNotExist:
             return Response({f'FUDEU'}, status=status.HTTP_400_BAD_REQUEST)
         
