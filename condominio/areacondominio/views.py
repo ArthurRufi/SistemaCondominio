@@ -14,21 +14,22 @@ from datetime import date
 class APIArea(APIView):
     permission_classes = [AllowAny]
     def get(self, request):
-        
         area = modelsArea .objects.all()
         serializers = SerializersArea(area, many=True)
         return Response(serializers.data)
-    
+
+    def delete():
+        pass
+
+#view que adiciona uma nova area
+class APIAdicionarArea(APIView):
+    #adicionar validacao para caso a area já exista
     def post(self, request):
         serializer = SerializersArea(data=request.data)
         if serializer.is_valid():
             serializer.save()  # Salva o novo objeto no banco de dados
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def delete():
-        pass
-
 
 
 #api que consulta o status de uma area especifica deve ser usada junto a api de reser a de area
@@ -76,12 +77,19 @@ class APISearchReservaDate(APIView):
 #api que reserva aquela area para aquele dia x
 class APIAddReserva(APIView):
     def post(self, request):
-        serializer = SerializersReservasArea(data=request.data)
-        if serializer.is_valid():
-            serializer.save()  # Salva o novo objeto no banco de dados
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+        
+
+        try:    
+            serializer = SerializersReservasArea(data=request.data)
+        
+            if serializer.is_valid():
+                serializer.save()  # Salva o novo objeto no banco de dados
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        except serializer.DoesNotExist:
+            return Response({f'FUDEU'}, status=status.HTTP_400_BAD_REQUEST)
+        
 
 class APIDeleteReserva():
     pass
