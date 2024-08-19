@@ -18,9 +18,6 @@ class APIArea(APIView):
         serializers = SerializersArea(area, many=True)
         return Response(serializers.data)
 
-    def delete():
-        pass
-
 #view que adiciona uma nova area
 class APIAdicionarArea(APIView):
     #adicionar validacao para caso a area já exista
