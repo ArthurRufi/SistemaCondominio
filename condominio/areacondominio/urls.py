@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import APIArea, APISearchArea, APISearchReservaDate, APIAddReserva
+from .views import APIArea, APISearchArea, APISearchReservaDate, APIAddReserva, APIAdicionarArea
 
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('consultar-reservas/<str:dia>/<str:mes>/<str:ano>/', APISearchReservaDate.as_view(), name='consultar'),
     #realiza a reserva da area e caso esteja reservada ela é retornada um badrequest
     path('reservar/', APIAddReserva.as_view(), name='reservar'),
+    path('adicionar-area/', APIAdicionarArea.as_view(), name='adicionar')
 ]

@@ -5,7 +5,7 @@ class SerializersArea(serializers.Serializer):
     nome = serializers.CharField()
     status = serializers.BooleanField()
     tipo = serializers.CharField()
-
+    condominioCodigo = serializers.IntegerField()
     def create(self, validated_data):
         return modelsArea.objects.create(**validated_data)
     

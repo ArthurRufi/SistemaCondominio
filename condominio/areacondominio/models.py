@@ -10,7 +10,7 @@ class modelsArea(models.Model):
     #se refere a tipo: quadras, churrasqueiras, piscinas, area de lazer ou area de eventos
     tipo = models.CharField(max_length=1000)
     #utiliza o codigo do condominio para filtrar na base de dados
-    condominioCodigo = models.IntegerField(db_index=True)
+    condominioCodigo = models.IntegerField(db_index=True, default=0)
 
 #essa classe se refere as areas reservadas do condominio em um determinado periodo de tempo
 class modelsReservasArea(models.Model):
@@ -21,7 +21,7 @@ class modelsReservasArea(models.Model):
     horarioReserva = models.TimeField()
     tempoTotal = models.IntegerField(default=3)
     tiporeserva = models.CharField(max_length=255, default=' ')
-    condominioCodigo = models.IntegerField(db_index=True)
+    condominioCodigo = models.IntegerField(db_index=True, default=0)
 
 
 #essa classe se refere a manutencao de areas
@@ -31,4 +31,4 @@ class modelsAreaManuntencao(models.Model):
     ultimamanutencao = models.DateField()
     proximamanutencao = models.DateField()
     statusServico = models.CharField(max_length=255)
-    condominioCodigo = models.IntegerField(db_index=True)
+    condominioCodigo = models.IntegerField(db_index=True, default=0)

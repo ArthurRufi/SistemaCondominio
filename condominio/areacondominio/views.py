@@ -18,15 +18,29 @@ class APIArea(APIView):
         serializers = SerializersArea(area, many=True)
         return Response(serializers.data)
 
+
 #view que adiciona uma nova area
 class APIAdicionarArea(APIView):
+    permission_classes = [AllowAny]
     #adicionar validacao para caso a area já exista
     def post(self, request):
         serializer = SerializersArea(data=request.data)
-        if serializer.is_valid():
-            serializer.save()  # Salva o novo objeto no banco de dados
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        nomearea = request.data.get('nome')
+        area = modelsArea.objects.filter(nome = nomearea)
+        
+        if not area.exists():
+            print('c')
+            if serializer.is_valid():
+                serializer.save()  # Salva o novo objeto no banco de dados
+                print('a')
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                print('b')
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif area.exists():
+            print('d')
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+        
 
 
 #api que consulta o status de uma area especifica deve ser usada junto a api de reser a de area
