@@ -32,3 +32,9 @@ class modelsAreaManuntencao(models.Model):
     proximamanutencao = models.DateField()
     statusServico = models.CharField(max_length=255)
     condominioCodigo = models.IntegerField(db_index=True, default=0)
+
+#segura na fila para adição no db
+'''
+class modelsListaAdicaoArea():
+    pass
+'''

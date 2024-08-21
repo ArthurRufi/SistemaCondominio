@@ -29,22 +29,18 @@ class APIAdicionarArea(APIView):
         nomearea = request.data.get('nome')
         if validacaoDeCaractere(nomearea) == False:
             return Response({'ERROR, CARACTERES NÃO PERMITIDOS!!!!!!!!'}, status=status.HTTP_400_BAD_REQUEST)
+        
         area = modelsArea.objects.filter(nome = nomearea)
         
-        if not area.exists():
-            print('c')
+        if not area.exists():            
             if serializer.is_valid():
                 serializer.save()  # Salva o novo objeto no banco de dados
-                print('a')
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
-                print('b')
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         elif area.exists():
-            print('d')
             return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
         
-
 
 #api que consulta o status de uma area especifica deve ser usada junto a api de reser a de area
 class APISearchArea(APIView):
