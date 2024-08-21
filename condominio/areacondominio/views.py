@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import modelsArea, modelsAreaManuntencao, modelsReservasArea
 from .serializers import SerializersArea, SerializersManutencao, SerializersReservasArea, SerializersAreaStatus
 from django.views.generic import TemplateView
+from .utils import validacaoDeCaractere
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -26,6 +27,8 @@ class APIAdicionarArea(APIView):
     def post(self, request):
         serializer = SerializersArea(data=request.data)
         nomearea = request.data.get('nome')
+        if validacaoDeCaractere(nomearea) == False:
+            return Response({'ERROR, CARACTERES NÃO PERMITIDOS!!!!!!!!'}, status=status.HTTP_400_BAD_REQUEST)
         area = modelsArea.objects.filter(nome = nomearea)
         
         if not area.exists():
