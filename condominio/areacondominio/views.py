@@ -46,13 +46,8 @@ class APIAdicionarArea(APIView):
 class APISearchArea(APIView):
     permission_classes = [AllowAny]
     
-    def get(self, request, nome):
-        convert =  list(nome)
-        for i in range(len(convert)):
-            if convert[i] == '-':
-                convert[i] = ' '
-                
-        convertname = ''.join(convert)
+    def get(self, request, nome):        
+        convertname = nome.replace('-',' ')
 
         if not convertname:
             return Response({'error': 'Nome não fornecido.'}, status=status.HTTP_400_BAD_REQUEST)
@@ -73,7 +68,6 @@ class APISearchReservaDate(APIView):
             date_convert = date(int(ano), int(mes), int(dia))
             reserva = modelsReservasArea.objects.filter(dataReserva=date_convert, data = resquest.data)
             if reserva.exists():
-                # Serializa os resultados
                 serializer = SerializersReservasArea(reserva, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
