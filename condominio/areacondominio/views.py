@@ -10,7 +10,6 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from datetime import date
 
-
 #api que consulta o status de todas as areas
 class APIArea(APIView):
     permission_classes = [AllowAny]
@@ -60,7 +59,8 @@ class APISearchArea(APIView):
             return Response({'message': f'Nenhuma área encontrada com o nome fornecido: {convertname}'}, status=status.HTTP_404_NOT_FOUND)
         
 
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!arrumar repeticao de codigo        
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!arrumar repeticao de codigo  
+# arrumar oq cacete?      
 #api que consulta status da area naquela data
 class APISearchReservaDate(APIView):
     def get(self, resquest, dia, mes, ano):
@@ -81,8 +81,6 @@ class APISearchReservaDate(APIView):
 #api que reserva aquela area para aquele dia x
 class APIAddReserva(APIView):
     def post(self, request):
-
-
         try:    
             serializer = SerializersReservasArea(data=request.data)
         
