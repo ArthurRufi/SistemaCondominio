@@ -78,6 +78,16 @@ class APISearchReservaDate(APIView):
             return Response({'message': 'Data inválida.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class APIReservas(APIView):
+    permission_classes = [AllowAny]
+    
+    def get(self, request):
+        
+        area = modelsReservasArea .objects.all()
+        serializers = SerializersReservasArea(area, many=True)
+        return Response(serializers.data)
+
+
 #api que reserva aquela area para aquele dia x
 class APIAddReserva(APIView):
     def post(self, request):
