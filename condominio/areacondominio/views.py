@@ -27,7 +27,7 @@ class APIAdicionarArea(APIView):
         serializer = SerializersArea(data=request.data)
         nomearea = request.data.get('nome')
         if validacaoDeCaractere(nomearea) == False:
-            return Response({'ERROR, CARACTERES NÃO PERMITIDOS!!!!!!!!'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'ERROR: CARACTERES NÃO PERMITIDOS!!!!!!!!'}, status=status.HTTP_400_BAD_REQUEST)
         
         area = modelsArea.objects.filter(nome = nomearea)
         
@@ -109,6 +109,7 @@ ADICIONAR ISSO NO FUTURO PARA CONVERTER INFORMAÇÕES EM URL
 from urllib.parse import quote
 
 # Exemplo de nome de área
+ISSO CODIFICA OS NOMES PARA FACILITAR PARA O FRONT END
 nome_area = "Salão de Festas"
 
 # Codificar o nome para uso em URLs

@@ -7,3 +7,6 @@ def validacaoDeCaractere(argumento):
     else:
         return True
     
+
+#adicionar logica para duplicacao no banco de dados
+    
