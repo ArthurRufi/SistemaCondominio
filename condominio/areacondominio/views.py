@@ -87,7 +87,7 @@ class APIReservas(APIView):
         serializers = SerializersReservasArea(area, many=True)
         return Response(serializers.data)
 
-
+#asdasd
 #api que reserva aquela area para aquele dia x
 class APIAddReserva(APIView):
     def post(self, request):
