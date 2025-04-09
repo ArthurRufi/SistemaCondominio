@@ -48,5 +48,35 @@ class ConsultarVisitantesPorMorador(APIView):
 
 #aqui consulta morador por residencia
 class ConsultarMoradorPorResidencia(APIView):
-    def get(self, request):
+    def post(self, request):
         pass
+
+#------------------------------------------------------------------------------------------------------------------------------#
+#------------------------------------------ABAIXO TRATA-SE SOBRE REGISTRO E EXCLUSÃO DE MORADORES E VISITANTES-----------------#
+
+class AdicionarMorador(APIView):
+    def post(self, request):
+        serializer = SerializersMorador(data= request.data)
+
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        except Exception as e:
+            return Response(
+                {"detail": "Ocorreu um erro inesperado ao tentar adicionar o morador."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class AdicionarVisitante(APIView):
+    pass
+
+
+class ExcluirMorador(APIView):
+    pass
+
+
+class ExcluirVisitante(APIView):
+    pass
