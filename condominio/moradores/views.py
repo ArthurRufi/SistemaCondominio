@@ -7,8 +7,6 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 
 
-
-
 #classe responsavel por entragar todos os moradores (remover futuramente)
 class ConsultarListaCompletaMorador(APIView):
     permission_classes= [AllowAny]
@@ -17,12 +15,14 @@ class ConsultarListaCompletaMorador(APIView):
         serializers = SerializersMorador(moradores, many = True)
         return Response(serializers.data, status=status.HTTP_200_OK)
     
+
 #aqui consulta visitantes 
 class ConsultarVisitantes(APIView):
     def get(self, request):
         visitantes = Visitantes.objects.all()
         serializers = SerializersVisitante(visitantes, many= True)
         return Response(serializers.data, status=status.HTTP_200_OK)
+
 
 #aqui consulta um visitante em especifico
 class ConsultarVisitante(APIView):
@@ -33,6 +33,19 @@ class ConsultarVisitante(APIView):
             return Response(serializers.data, status=status.HTTP_200_OK)
         except Visitantes.DoesNotExist:
             return Response ({"error": "Usuario nao encontrado"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        
+
+#Consulta de visitantes cadastrados por morador
+class ConsultarVisitantesPorMorador(APIView):
+    def get(self, request, id):
+        try:
+            morador = Visitantes.objects.filter(codigoMorador = id)
+            serializers = SerializersVisitante(morador)
+            return Response(serializers.data, many=True)
+        except Visitantes.DoesNotExist:
+            return Response({"ERROR": "Morador Não encontrado"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
 #aqui consulta morador por residencia
 class ConsultarMoradorPorResidencia(APIView):
     def get(self, request):
