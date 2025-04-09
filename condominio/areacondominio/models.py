@@ -5,7 +5,7 @@ from django.db import models
 #essa classe se refere a todas as areas do condominio
 class modelsArea(models.Model):
     nome = models.CharField(max_length=255)
-    #se status for marcado false significa que nao disponivel (usar em casos de manutenção ou fechamento, nunca em caso de reserva)
+    #se status for marcado false significa que nao disponivel (usar em casos de manutenção sem previsao de conclusao ou fechamento, nunca em caso de reserva)
     status = models.BooleanField (default=False)
     #se refere a tipo: quadras, churrasqueiras, piscinas, area de lazer ou area de eventos
     tipo = models.CharField(max_length=1000)
