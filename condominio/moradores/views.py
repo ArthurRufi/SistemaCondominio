@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 
-
+#---------------------------------------------------------FALTA AUTENTICACAO CARALHOOOOOOOOOOOOOOOOOOO----------------------------------------------------------------
 #classe responsavel por entragar todos os moradores (remover futuramente)
 class ConsultarListaCompletaMorador(APIView):
     permission_classes= [AllowAny]
