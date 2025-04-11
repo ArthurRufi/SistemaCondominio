@@ -79,15 +79,47 @@ class AdicionarVisitante(APIView):
                 return Response(serializers.data, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response(
-                {"ERROR INFO: Algo de errado ocorreu: confira o que é: "}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                {f"ERROR INFO: Algo de errado ocorreu: confira o que é: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+ 
+class ExcluirMorador(APIView):
+     def delete(self, request, id):
+        try:
+            sinal = Moradores.objects.get(codigoMorador=id)
+            sinal.delete()
+            return Response(
+                {"mensagem": "Morador deletado com sucesso."},
+                status=status.HTTP_204_NO_CONTENT
+            )
+        except Moradores.DoesNotExist:
+            return Response(
+                {"erro": "Morador não encontrado."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            return Response(
+                {"erro": f"Ocorreu um erro ao deletar: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
 
-class ExcluirMorador(APIView):
-    def delete():
-        pass
-
-
 class ExcluirVisitante(APIView):
-    def delete():
-        pass
+     def delete(self, request, id):
+        try:
+            sinal = Visitantes.objects.get(codigoVisitante=id)
+            sinal.delete()
+            return Response(
+                {"mensagem": "Visitante deletado com sucesso."},
+                status=status.HTTP_204_NO_CONTENT
+            )
+        except Visitantes.DoesNotExist:
+            return Response(
+                {"erro": "Visitante não encontrado."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            return Response(
+                {"erro": f"Ocorreu um erro ao deletar: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
