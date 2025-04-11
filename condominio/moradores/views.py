@@ -10,8 +10,8 @@ from rest_framework.permissions import AllowAny
 #classe responsavel por entragar todos os moradores (remover futuramente)
 class ConsultarListaCompletaMorador(APIView):
     permission_classes= [AllowAny]
-    def get(self, request):
-        moradores = Moradores.objects.all()
+    def get(self, request, codigo):
+        moradores = Moradores.objects.filter(codigoCondominio = codigo)
         serializers = SerializersMorador(moradores, many = True)
         return Response(serializers.data, status=status.HTTP_200_OK)
     
@@ -71,12 +71,23 @@ class AdicionarMorador(APIView):
             )
 
 class AdicionarVisitante(APIView):
-    pass
+    def post(self, request):
+        serializers = SerializersMorador(data = request.data)
+        try:    
+            if serializers.is_valid():
+                serializers.save()
+                return Response(serializers.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response(
+                {"ERROR INFO: Algo de errado ocorreu: confira o que é: "}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 class ExcluirMorador(APIView):
-    pass
+    def delete():
+        pass
 
 
 class ExcluirVisitante(APIView):
-    pass
+    def delete():
+        pass
