@@ -6,6 +6,7 @@ class Moradores(models.Model):
     codigoResidencia = models.IntegerField(default= 0)
     codigoMorador = models.IntegerField(default=0)
     responsavel = models.BooleanField(default=False)
+    codigoCondominio = models.IntegerField(default=0)
 
 
 class Visitantes(models.Model):
@@ -14,5 +15,6 @@ class Visitantes(models.Model):
     ultimaentrada = models.DateTimeField()
     #informacoes no confindoc
     codigoIdentificador = models.IntegerField()
+    codigoCondominio = models.IntegerField(default=0)
 
 #LEMBRAR DE CRIAR TABELAS PARA HISTORICO DE VISITAS
