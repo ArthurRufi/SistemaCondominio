@@ -9,7 +9,6 @@ Este repositório contém o backend de um sistema completo de gestão condominia
 
 - **`Condominio/`**: Projeto Django responsável pela base de dados e funcionalidades centrais.
 - **`CondominioFront/`**: Projeto Angular responsável pelo frontend da aplicação.
-- **`ServicesDevs/`**: Serviços internos e auxiliares do sistema.
 
 ---
 
